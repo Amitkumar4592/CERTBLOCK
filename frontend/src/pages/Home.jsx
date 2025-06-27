@@ -1,45 +1,46 @@
 import React from 'react';
+import '../styles/Home.css';
 
-export default function Home() {
+const Home = () => {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%)' }}>
-      <div style={{ textAlign: 'center', marginBottom: 40 }}>
-        <span style={{ fontSize: 60, display: 'block', marginBottom: 16 }}>🎓</span>
-        <h1 style={{ fontSize: 36, fontWeight: 800, margin: 0 }}>Blockchain Certificate System</h1>
-        <p style={{ fontSize: 20, color: '#444', margin: '18px 0 0 0', maxWidth: 600, textAlign: 'center', fontWeight: 400 }}>
-          Securely issue, verify, and manage educational certificates on the blockchain.<br />
-          Role-based dashboards for Institutions, Receivers, Verifiers, and Admins.
-        </p>
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center' }}>
-        <a href="/login" style={cardStyle}>Login</a>
-        <a href="/signup" style={cardStyle}>Signup</a>
-        <a href="/institution" style={cardStyle}>Institution Dashboard</a>
-        <a href="/receiver" style={cardStyle}>Receiver Dashboard</a>
-        <a href="/verifier" style={cardStyle}>Verifier Page</a>
-        <a href="/admin" style={cardStyle}>Admin Dashboard</a>
-      </div>
-      <footer style={{ marginTop: 56, color: '#888', fontSize: 15, letterSpacing: '.01em', paddingBottom: 20 }}>
-        &copy; {new Date().getFullYear()} Blockchain Certificate System
-      </footer>
+    <div className="home-container">
+      <section className="hero">
+        <h1>Blockchain Certificate Verification System</h1>
+        <p>Secure, transparent, and tamper-proof certificate management using blockchain technology.</p>
+        <a href="/login" className="cta-button">Get Started</a>
+      </section>
+      
+      <section className="about">
+        <h2>About the Project</h2>
+        <div className="about-content">
+          <div className="about-text">
+            <p>
+              Our Blockchain Certificate Verification System revolutionizes how educational and professional certificates are issued, stored, and verified. 
+              By leveraging blockchain technology, we ensure that certificates are immutable, transparent, and verifiable by authorized parties.
+            </p>
+            <p>
+              Institutions can issue certificates directly to receivers, who can then share verification codes with third parties. 
+              Verifiers can instantly check the authenticity of any certificate without needing to contact the issuing authority.
+            </p>
+          </div>
+          <div className="about-features">
+            <div className="feature-card">
+              <h3>Secure Storage</h3>
+              <p>Certificates are stored on IPFS and referenced on the blockchain, ensuring they can't be altered.</p>
+            </div>
+            <div className="feature-card">
+              <h3>Instant Verification</h3>
+              <p>Anyone can verify a certificate's authenticity using a unique code.</p>
+            </div>
+            <div className="feature-card">
+              <h3>Role-based Access</h3>
+              <p>Different dashboards for institutions, receivers, verifiers, and administrators.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
-}
-
-const cardStyle = {
-  background: '#fff',
-  borderRadius: 18,
-  boxShadow: '0 2px 12px 0 rgba(44,62,80,0.06)',
-  padding: '32px 24px',
-  textDecoration: 'none',
-  color: '#1a1a1a',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  transition: 'box-shadow 0.2s, transform 0.2s',
-  fontWeight: 500,
-  minHeight: 80,
-  minWidth: 180,
-  fontSize: 18,
-  cursor: 'pointer',
 };
+
+export default Home;

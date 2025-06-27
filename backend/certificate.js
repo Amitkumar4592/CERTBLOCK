@@ -195,4 +195,51 @@ router.delete('/users/:id', auth(['admin']), async (req, res) => {
   }
 });
 
+// Download certificate file by ID (returns IPFS gateway URL)
+router.get('/:id/download', auth(['institution', 'receiver', 'admin']), async (req, res) => {
+  try {
+    const cert = await Certificate.findById(req.params.id);
+    if (!cert) return res.status(404).json({ message: 'Certificate not found.' });
+    // Option 1: Redirect to public IPFS gateway
+    const ipfsUrl = `https://gateway.pinata.cloud/ipfs/${cert.ipfsHash}`;
+    return res.status(302).redirect(ipfsUrl);
+    // Option 2: (Advanced) Stream file from IPFS (not implemented)
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.', error: err.message });
+  }
+});
+
+// Get certificate details by MongoDB ID
+router.get('/:id', auth(['institution', 'receiver', 'admin']), async (req, res) => {
+  try {
+    const cert = await Certificate.findById(req.params.id);
+    if (!cert) return res.status(404).json({ message: 'Certificate not found.' });
+    res.status(200).json({ certificate: cert });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.', error: err.message });
+  }
+});
+
+// (Optional) Audit log/history placeholder
+ router.get('/:id/history', auth(['admin', 'institution']), async (req, res) => {
+   // Not implemented: would return issuance, revocation, etc. events
+   res.status(501).json({ message: 'Not implemented.' });
+ });
+
+// (Optional) Search/filter certificates
+router.get('/search', auth(['admin', 'institution']), async (req, res) => {
+  try {
+    const { studentName, course, receiverEmail, revoked } = req.query;
+    const query = {};
+    if (studentName) query.studentName = { $regex: studentName, $options: 'i' };
+    if (course) query.course = { $regex: course, $options: 'i' };
+    if (receiverEmail) query.receiverEmail = receiverEmail;
+    if (revoked !== undefined) query.revoked = revoked === 'true';
+    const certs = await Certificate.find(query);
+    res.status(200).json({ certificates: certs });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.', error: err.message });
+  }
+});
+
 export default router;

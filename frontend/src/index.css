@@ -1,3 +1,29 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Ensure full height for app container */
+html, body, #root, .app-container {
+  min-height: 100vh;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +91,59 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-mode a {
+  color: #4da6ff;
+}
+
+body.dark-mode a:hover {
+  color: #80bfff;
+}
+
+body.dark-mode button {
+  background-color: #333333;
+  color: #f0f0f0;
+}
+
+body.dark-mode button:hover {
+  border-color: #4da6ff;
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+  color: #ffffff;
+}
+
+body.dark-mode .navbar {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark-mode .dashboard-container {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark-mode input, body.dark-mode textarea {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+body.dark-mode table {
+  color: #f0f0f0;
+}
+
+body.dark-mode th, body.dark-mode td {
+  border-color: #444;
+}
+
+body.dark-mode .error-message {
+  color: #ff6666;
 }
