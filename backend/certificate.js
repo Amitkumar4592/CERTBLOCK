@@ -203,10 +203,10 @@ router.get('/:id/download', auth(['institution', 'receiver', 'admin']), async (r
     // Attempt to stream the file directly from IPFS so the frontend gets the PDF without dealing with CORS / redirect issues.
     const ipfsUrl = `https://gateway.pinata.cloud/ipfs/${cert.ipfsHash}`;
     try {
-      const ipfsRes = await axios.get(ipfsUrl, { responseType: 'stream' });
+      const ipfsRes = await axios.get(ipfsUrl, { responseType: 'arraybuffer' });
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename=certificate_${cert._id}.pdf`);
-      ipfsRes.data.pipe(res);
+      res.send(Buffer.from(ipfsRes.data, 'binary'));
     } catch (streamErr) {
       console.error('Failed to stream PDF from IPFS:', streamErr.message);
       // Fallback: Redirect if streaming fails
